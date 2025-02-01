@@ -20,7 +20,7 @@
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/fahimmoha/SchoolProject.git
+   git clone https://github.com/SethKkorir/SchoolP.git
 
 # sp
 # sp
