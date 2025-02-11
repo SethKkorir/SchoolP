@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['email'] = $user['email']; // Store email in session
 
             // Redirect to the dashboard or protected page
-            header('Location: index.html');
+            header('Location: index.php');
             exit;
         } else {
             // Invalid credentials
