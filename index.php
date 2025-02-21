@@ -1,8 +1,5 @@
 <?php
 session_start(); // Start the session at the top of the file
-
-// Check if the user is logged in
-$loggedIn = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +9,7 @@ $loggedIn = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LandLink: Empowering Dryland Communities</title>
     <style>
-        /* Your CSS styles here */
+        /* Your CSS styles here (unchanged) */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -193,19 +190,27 @@ $loggedIn = isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
         footer > div {
             margin-bottom: 20px;
         }
-
-
     </style>
     <script>
+        // Function to check if the user is logged in
         function checkLogin(page) {
-            <?php if (!$loggedIn): ?>
-                alert("You need to register or log in to access this page.");
-                window.location.href = "register.php?redirect=" + encodeURIComponent(page);
-                return false; // Prevent the default link behavior
-            <?php else: ?>
-                window.location.href = page;
-                return true; // Allow the link to proceed
-            <?php endif; ?>
+            fetch('check_session.php') // Make an AJAX call to check the session
+                .then(response => response.json())
+                .then(data => {
+                    if (data.loggedIn) {
+                        // If logged in, redirect to the requested page
+                        window.location.href = page;
+                    } else {
+                        // If not logged in, show an alert and redirect to the registration page
+                        alert("You need to register or log in to access this page.");
+                        window.location.href = "register.php?redirect=" + encodeURIComponent(page);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking session:', error);
+                });
+
+            return false; // Prevent the default link behavior
         }
     </script>
 </head>
