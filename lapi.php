@@ -1,16 +1,15 @@
 <?php
-session_start(); // Start the session
+session_start();
 
-// Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Include the database connection
-    require_once 'config.php'; // Ensure this file contains your database credentials
+    require_once 'config.php';
 
     // Get form data
     $email = $_POST['login-email'];
     $password = $_POST['login-password'];
 
-    // Validate inputs (ensure they are not empty)
+    // Validate inputs
     if (empty($email) || empty($password)) {
         $error_message = "Email and password are required.";
         echo "<script>alert('$error_message'); window.location.href = 'login.php';</script>";
@@ -18,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Query the database for a matching email
-    $sql = "SELECT * FROM users WHERE email = :email"; // Assuming your users table is named 'users'
+    $sql = "SELECT * FROM users WHERE email = :email";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':email', $email);
 
@@ -44,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
     } catch (PDOException $e) {
-        // Handle database errors
+        // Handle database errors 
         $error_message = "Database error: " . $e->getMessage();
         echo "<script>alert('$error_message'); window.location.href = 'login.php';</script>";
         exit;

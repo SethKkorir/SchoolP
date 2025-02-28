@@ -1,8 +1,10 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: register.php?redirect=land-rights.php");
-    exit();
+
+// Redirect to login page if the user is not logged in
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: login.php");
+    exit;
 }
 ?>
 

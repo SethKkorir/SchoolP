@@ -126,55 +126,93 @@
     }
 
     function validateForm() {
-      const username = document.getElementById('username').value;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const confirmPassword = document.getElementById('confirm_password').value;
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm_password').value;
 
-      // Check for empty fields
-      if (username === "") {
+    // Check for empty fields
+    if (username === "") {
         alert("Please enter your full name.");
-        return false;  // Prevent form submission
-      }
-      const namePattern = /^[A-Za-z\s]+$/;
-      if (!namePattern.test(username)) {
-        alert("Full name must contain only letters and spaces.");
-        return false;  // Prevent form submission
-      }
-      if (email === "") {
-        alert("Please enter your email address.");
-        return false;  // Prevent form submission
-      }
-      
-      // Email validation: Check if email format is valid
-      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-      if (!emailPattern.test(email)) {
-        alert("Please enter a valid email address.");
-        return false;  // Prevent form submission
-      }
-      if (password === "") {
-        alert("Please enter a password.");
-        return false;  // Prevent form submission
-      }
-      if (confirmPassword === "") {
-        alert("Please confirm your password.");
-        return false;  // Prevent form submission
-      }
-
-      // Passwords match validation
-      if (password !== confirmPassword) {
-        alert("Passwords do not match.");
-        return false;  // Prevent form submission
-      }
-
-      // Password strength validation (simple check)
-      if (password.length < 6) {
-        alert("Password must be at least 6 characters long.");
-        return false;  // Prevent form submission
-      }
-
-      return true;  // Allow form submission if all checks pass
+        return false; // Prevent form submission
     }
+
+    // Check if the full name contains only letters and spaces
+    const namePattern = /^[A-Za-z\s]+$/;
+    if (!namePattern.test(username)) {
+        alert("Full name must contain only letters and spaces.");
+        return false; // Prevent form submission
+    }
+
+    // Check if the email is empty
+    if (email === "") {
+        alert("Please enter your email address.");
+        return false; // Prevent form submission
+    }
+
+    // Check if the email format is valid
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return false; // Prevent form submission
+    }
+
+    // Check if the password is empty
+    if (password === "") {
+        alert("Please enter a password.");
+        return false; // Prevent form submission
+    }
+
+    // Check if the confirm password is empty
+    if (confirmPassword === "") {
+        alert("Please confirm your password.");
+        return false; // Prevent form submission
+    }
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return false; // Prevent form submission
+    }
+
+    // Password strength validation
+    function validatePassword(password) {
+        // Check if the password is at least 6 characters long
+        if (password.length < 6) {
+            alert("Password must be at least 6 characters long.");
+            return false;
+        }
+
+        // Check if the password contains at least one uppercase letter
+        if (!/[A-Z]/.test(password)) {
+            alert("Password must contain at least one uppercase letter.");
+            return false;
+        }
+
+        // Check if the password contains at least one lowercase letter
+        if (!/[a-z]/.test(password)) {
+            alert("Password must contain at least one lowercase letter.");
+            return false;
+        }
+
+        // Check if the password contains at least one number
+        if (!/[0-9]/.test(password)) {
+            alert("Password must contain at least one number.");
+            return false;
+        }
+
+        // If all checks pass, return true
+        return true;
+    }
+
+    // Validate the password
+    if (!validatePassword(password)) {
+        return false; // Prevent form submission if validation fails
+    }
+
+    // If all checks pass, allow form submission
+    return true;
+}
   </script>
 </body>
 </html>

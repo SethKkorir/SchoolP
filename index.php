@@ -227,6 +227,7 @@ session_start(); // Start the session at the top of the file
                 <li><a href="water-management.php" onclick="return checkLogin('water-management.php')">Water Resource Management</a></li>
                 <li><a href="livelihood-support.php" onclick="return checkLogin('livelihood-support.php')">Livelihood Support</a></li>
                 <li><a href="register.php">Registration</a></li>
+                <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
     </header>
