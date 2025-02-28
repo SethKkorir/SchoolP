@@ -84,11 +84,12 @@ if (!isset($_SESSION['user_id'])) {
                 .then(data => {
                     if (data.loggedIn) {
                         // If logged in, redirect to the requested page
-                        window.location.href = page;
+                        window.location.href = "land-rights.php";
                     } else {
                         // If not logged in, show an alert and redirect to the registration page
                         alert("You need to register or log in to access this page.");
                         window.location.href = "register.php?redirect=" + encodeURIComponent(page);
+
                     }
                 })
                 .catch(error => {
