@@ -94,7 +94,8 @@ session_start(); // Start the session at the top
         <input type="submit" value="Login">
       </div>
       <div class="toggle-btn">
-        <a href="register.php">Don't have an account? Register</a>
+        <a href="register.php">Don't have an account? Register</a><br> 
+        <a href="forgot_password.php" id="forgotPasswordForm">Forgot Password?</a>
       </div>
     </form>
   </div>
