@@ -6,8 +6,6 @@ if (!isset($_SESSION['user_id'])) {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,5 +72,39 @@ if (!isset($_SESSION['user_id'])) {
         
         <p><a href="index.php">Back to Home</a></p>
     </div>
+
+    <!-- Add the JavaScript here -->
+    <script>
+        // Function to check if the user is logged in
+        function checkLogin(page, event) {
+            event.preventDefault(); // Prevent the default link behavior
+
+            fetch('check_session.php') // Make an AJAX call to check the session
+                .then(response => response.json())
+                .then(data => {
+                    if (data.loggedIn) {
+                        // If logged in, redirect to the requested page
+                        window.location.href = page;
+                    } else {
+                        // If not logged in, show an alert and redirect to the registration page
+                        alert("You need to register or log in to access this page.");
+                        window.location.href = "register.php?redirect=" + encodeURIComponent(page);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking session:', error);
+                });
+        }
+
+        // Attach event listeners to restricted links
+        document.addEventListener('DOMContentLoaded', function () {
+            const restrictedLinks = document.querySelectorAll('a.restricted');
+            restrictedLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    checkLogin(this.href, event);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
